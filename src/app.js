@@ -57,9 +57,9 @@ function checkCheckbox(checkbox) {
         count -= 1;
     } else {
         checkbox.nextSibling.classList.remove('line-through');
-        count += 1 ;
+        count += 1;
     }
-    countItemsLeft(count) ;
+    countItemsLeft(count);
 }
 
 function editTodoText(todoText) {
@@ -70,7 +70,6 @@ function editTodoText(todoText) {
     todoText.value += editInput.value;
     todoText.previousSibling.classList.add('hidden');
     todoText.nextSibling.classList.add('hidden');
-
 
     todoText.addEventListener('keypress', function (e) {
 
@@ -86,29 +85,24 @@ function removeTodo(deleteButton) {
     const checkboxList = document.getElementsByClassName('todoCheckboxClass');
 
     deleteButton.parentNode.remove();
-    if(!deleteButton.previousSibling.previousSibling.checked){
-        count -= 1 ;
-        countItemsLeft(count) ;
+    if (!deleteButton.previousSibling.previousSibling.checked) {
+        count -= 1;
+        countItemsLeft(count);
     }
-    if(checkboxList.length === 0){
+    if (checkboxList.length === 0) {
         optionsContainer.classList.add('hidden')
-    inputTodoCheckbox.classList.add('hidden')
+        inputTodoCheckbox.classList.add('hidden')
     }
-    
+
 }
 
 function appendTodo() {
     inputTodo.addEventListener('keypress', function (e) {
         if (e.key === 'Enter' && inputTodo.value.length > 1) {
-
             createTodoElement();
             inputTodo.value = '';
-
             count += 1;
-            countItemsLeft(count) ;
-            
-
-
+            countItemsLeft(count);
         }
     });
 }
@@ -134,7 +128,6 @@ function getAllActiveItemsList() {
                 checkboxList[index].parentNode.classList.remove('hidden');
             }
         }
-
     })
 }
 
@@ -158,40 +151,39 @@ function clearCompletedFun() {
     clearCompleted.addEventListener('click', () => {
 
         const checkboxList = document.getElementsByClassName('todoCheckboxClass');
-        let size = checkboxList.length ;
-        for (let index = size-1; index >= 0; index--) {
+        let size = checkboxList.length;
+        for (let index = size - 1; index >= 0; index--) {
             if (checkboxList[index].checked) {
                 checkboxList[index].parentNode.remove();
-            } 
+            }
         }
     })
 }
 
-function countItemsLeft(count){
+function countItemsLeft(count) {
     itemsLeft.innerHTML = `${count} item left!`;
 }
 
 inputTodoCheckbox.addEventListener('click', () => {
-    if(inputTodoCheckbox.checked){ 
+    if (inputTodoCheckbox.checked) {
         const checkboxList = document.getElementsByClassName('todoCheckboxClass');
-        for(let index = 0 ; index < checkboxList.length ; index++){
+        for (let index = 0; index < checkboxList.length; index++) {
             checkboxList[index].checked = true;
             checkboxList[index].nextSibling.classList.add('line-through');
         }
-        count = 0 ;
-        countItemsLeft(count) ;
+        count = 0;
+        countItemsLeft(count);
     }
-    else{
+    else {
         const checkboxList = document.getElementsByClassName('todoCheckboxClass');
-        for(let index = 0 ; index < checkboxList.length ; index++){
-            checkboxList[index].checked = false ;
+        for (let index = 0; index < checkboxList.length; index++) {
+            checkboxList[index].checked = false;
             checkboxList[index].nextSibling.classList.remove('line-through');
         }
-        count = checkboxList.length ;
-        countItemsLeft(count) ;
-
+        count = checkboxList.length;
+        countItemsLeft(count);
     }
-}) ;
+});
 
 appendTodo();
 
